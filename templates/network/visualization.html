@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/network.css">
+{% endblock %}
+
+{% block content %}
+<h1>European Soccer Database (2008-2024)</h1>
+
+<div class="filters">
+    <select id="componentFilter">
+        <option value="">Strongly Connected Components</option>
+    </select>
+
+    <div class="button-group">
+        <button id="topScorers">Top Scorers</button>
+        <button id="topDefenders">Top Defenders</button>
+        <button id="topAssisters">Top Assisters</button>
+    </div>
+
+    <input type="text" id="searchFilter" placeholder="Search your own filter...">
+</div>
+
+<div id="network"></div>
+    
+    
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/static/js/network.js"></script>
+<script>
+    // Initialize network with dataset
+    fetch("{% url 'network:network-data' dataset.id %}")
+        .then(response => response.json())
+        .then(data => updateNetwork(data));
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Upload Dataset</h1>
+
+<form method="post" enctype="multipart/form-data" class="upload-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="submit-btn">Upload</button>
+</form>
+
+<div class="file-format">
+    <h3>Required CSV Format:</h3>
+    <pre>
+player_name,team,goals,assists,tackles,interceptions
+John Doe,Team A,10,5,20,15
+Jane Smith,Team B,15,12,8,5
+    </pre>
+</div>
+{% endblock %}

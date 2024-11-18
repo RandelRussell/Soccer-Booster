@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Football Network Analysis</h1>
+
+<div class="datasets">
+    <h2>My Archives</h2>
+    <ul class="dataset-list">
+        {% for dataset in datasets %}
+        <li>
+            <a href="{% url 'network:visualization' dataset.id %}">
+                {{ dataset.name }}
+            </a>
+            <span class="upload-date">{{ dataset.uploaded_at|date:"M d, Y" }}</span>
+        </li>
+        {% empty %}
+        <li class="empty-message">No datasets uploaded yet.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'network:upload' %}" class="upload-btn">Upload New Dataset</a>
+</div>
+{% endblock %}
